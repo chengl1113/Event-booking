@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import NavigationBar from './navbar';
 import EventCard from './EventCard';
 import db from '../api/firebase'
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, doc, getDoc, } from 'firebase/firestore';
+import useAuth from '../hooks/useAuth';
 
 
 const Home = () => {
-    const [events, setEvents] = useState([]);
+    const { auth } = useAuth();
 
+    const [events, setEvents] = useState([]);
+    const [userEvents, setUserEvents] = useState([])
+
+    // get all events
     useEffect(() => {
         const fetchEvents = async () => {
             try {
@@ -30,6 +35,29 @@ const Home = () => {
 
         fetchEvents();
     }, []);
+
+    // get all events of the user
+    useEffect(() => {
+        const fetchUserEvents = async () => {
+            try {
+                const userRef = doc(db, "Users", auth.id);
+                const userDoc = await getDoc(userRef);
+
+                const userData = userDoc.data();
+
+                const bookedEvents = userData.booked_events || []
+                const eventIds = bookedEvents.map(ref => ref.id);
+                setUserEvents(eventIds);
+                console.log('booked events: ', eventIds);
+
+            } catch (error) {
+                console.log("Error getting user events", error);
+            }
+        }
+        fetchUserEvents()
+
+    }, [])
+
 
     events.map((event) => (
         console.log(event.date)
@@ -56,7 +84,8 @@ const Home = () => {
                         })}
                         description={event.description}
                         maxCapacity={event.max_capacity}
-                        ticketsSold={event.tickets_sold} />
+                        ticketsSold={event.tickets_sold}
+                        userEvents={userEvents} />
                 ))}
             </div>
         </div>
