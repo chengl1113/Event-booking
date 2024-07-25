@@ -19,6 +19,9 @@ const Home = () => {
                     id: doc.id,
                     ...doc.data(),
                 }));
+                // sort from earliest to latest
+                eventsData.sort((a, b) => a.date.toDate() - b.date.toDate())
+
                 setEvents(eventsData);
             } catch (error) {
                 console.error("Error fetching events: ", error);
@@ -37,19 +40,24 @@ const Home = () => {
     return (
         <div>
             <NavigationBar />
-            <h1 className='m-5'>Events</h1>
-            {events.map((event) => (
-                <EventCard
-                    key={event.id}
-                    name={event.name}
-                    date={event.date.toDate().toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })}
-                    description={event.description}
-                    max_capacity={event.max_capacity} />
-            ))}
+            <div className='container d-flex flex-column justify-content-center align-items-center'>
+                <h1 className='m-5'>Events</h1>
+                {events.map((event) => (
+                    <EventCard
+                        key={event.id}
+                        name={event.name}
+                        date={event.date.toDate().toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+                        description={event.description}
+                        max_capacity={event.max_capacity}
+                        tickets_sold={event.tickets_sold} />
+                ))}
+            </div>
         </div>
     )
 }
