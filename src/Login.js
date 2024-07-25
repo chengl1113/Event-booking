@@ -52,6 +52,7 @@ const Login = () => {
                     const userData = doc.data()
                     console.log(doc.id, "=>", userData);
                     setAuth({
+                        id: doc.id,
                         email: userData.email,
                         name: userData.name,
                         isAdmin: userData.admin

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavigationBar from './navbar';
 import EventCard from './EventCard';
 import db from '../api/firebase'
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 
 
 const Home = () => {
@@ -45,6 +45,7 @@ const Home = () => {
                 {events.map((event) => (
                     <EventCard
                         key={event.id}
+                        id={event.id}
                         name={event.name}
                         date={event.date.toDate().toLocaleDateString('en-US', {
                             year: 'numeric',
@@ -54,8 +55,8 @@ const Home = () => {
                             minute: '2-digit'
                         })}
                         description={event.description}
-                        max_capacity={event.max_capacity}
-                        tickets_sold={event.tickets_sold} />
+                        maxCapacity={event.max_capacity}
+                        ticketsSold={event.tickets_sold} />
                 ))}
             </div>
         </div>
