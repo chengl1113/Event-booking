@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import NavigationBar from './navbar';
 
 const Account = () => {
     return (
-        <div>Account</div>
+        <NavigationBar />
     )
 }
 

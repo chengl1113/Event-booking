@@ -1,8 +1,10 @@
 import React from 'react'
+import NavigationBar from './navbar'
+
 
 const MyEvents = () => {
     return (
-        <div>MyEvents</div>
+        <NavigationBar />
     )
 }
 
