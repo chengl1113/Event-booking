@@ -4,6 +4,9 @@ import Login from "./Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 // Component imports
 import Home from './components/Home'
 import MyEvents from './components/MyEvents'
@@ -15,24 +18,26 @@ import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Routes>
+        <Route path="/" element={<Login />} />
 
-      {/* public Routes */}
-      <Route path="register" element={<Register />} />
-      <Route path="login" element={<Login />} />
+        {/* public Routes */}
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
 
-      {/* protected routes  */}
-      <Route element={<RequireAuth />}>
-        <Route path="home" element={<Home />} />
-        <Route path="myevents" element={<MyEvents />} />
-        <Route path="createevent" element={<CreateEvent />} />
-        <Route path="account" element={<Account />} />
-      </Route>
+        {/* protected routes  */}
+        <Route element={<RequireAuth />}>
+          <Route path="home" element={<Home />} />
+          <Route path="myevents" element={<MyEvents />} />
+          <Route path="createevent" element={<CreateEvent />} />
+          <Route path="account" element={<Account />} />
+        </Route>
 
-      <Route path="*" element={<Missing />} />
-      {/* </Route> */}
-    </Routes>
+        <Route path="*" element={<Missing />} />
+        {/* </Route> */}
+      </Routes>
+    </LocalizationProvider>
   );
 }
 
