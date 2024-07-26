@@ -5,8 +5,6 @@ import useAuth from '../hooks/useAuth';
 const NavigationBar = () => {
     const { auth } = useAuth();
 
-    console.log("auth", auth);
-
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>

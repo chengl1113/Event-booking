@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
 
 // Component imports
-import Layout from './components/Layout'
 import Home from './components/Home'
 import MyEvents from './components/MyEvents'
 import CreateEvent from './components/CreateEvent'
@@ -15,7 +14,6 @@ import RequireAuth from "./components/RequireAuth";
 
 
 function App() {
-  console.log("App.js loaded");
   return (
     <Routes>
       <Route path="/" element={<Login />} />

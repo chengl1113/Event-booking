@@ -10,10 +10,11 @@ const Home = () => {
     const { auth } = useAuth();
 
     const [events, setEvents] = useState([]);
-    const [userEvents, setUserEvents] = useState([])
+    const [userEventIds, setUserEventIds] = useState([])
 
     // get all events
     useEffect(() => {
+        console.log("home events: ", events);
         const fetchEvents = async () => {
             try {
                 const eventsRef = collection(db, "Events");
@@ -34,11 +35,11 @@ const Home = () => {
         };
 
         fetchEvents();
-    }, []);
+    }, [auth.id]);
 
-    // get all events of the user
+    // get all event ids of the user
     useEffect(() => {
-        const fetchUserEvents = async () => {
+        const fetchUserEventIds = async () => {
             try {
                 const userRef = doc(db, "Users", auth.id);
                 const userDoc = await getDoc(userRef);
@@ -47,23 +48,15 @@ const Home = () => {
 
                 const bookedEvents = userData.booked_events || []
                 const eventIds = bookedEvents.map(ref => ref.id);
-                setUserEvents(eventIds);
-                console.log('booked events: ', eventIds);
+                setUserEventIds(eventIds);
 
             } catch (error) {
-                console.log("Error getting user events", error);
+                console.error("Error getting user events", error);
             }
         }
-        fetchUserEvents()
+        fetchUserEventIds()
 
-    }, [])
-
-
-    events.map((event) => (
-        console.log(event.date)
-    ))
-
-
+    }, [auth.id])
 
     return (
         <div>
@@ -85,7 +78,7 @@ const Home = () => {
                         description={event.description}
                         maxCapacity={event.max_capacity}
                         ticketsSold={event.tickets_sold}
-                        userEvents={userEvents} />
+                        userEvents={userEventIds} />
                 ))}
             </div>
         </div>

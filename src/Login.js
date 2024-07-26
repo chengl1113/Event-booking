@@ -47,10 +47,8 @@ const Login = () => {
 
             // Credentials match
             if (!querySnapshot.empty) {
-                console.log("logged in!");
                 querySnapshot.forEach((doc) => {
                     const userData = doc.data()
-                    console.log(doc.id, "=>", userData);
                     setAuth({
                         id: doc.id,
                         email: userData.email,

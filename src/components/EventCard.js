@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 function EventCard({ id, name, date, description, maxCapacity, ticketsSold, userEvents }) {
     const [ticketsRemaining, setTicketsRemaining] = useState(maxCapacity - ticketsSold)
-    const [soldOut, setSoldOut] = useState(ticketsRemaining <= 0);
+    const soldOut = ticketsRemaining <= 0;
     const [userHasTickets, setUserHasTickets] = useState(userEvents.includes(id))
 
     const { auth } = useAuth();
@@ -29,7 +29,6 @@ function EventCard({ id, name, date, description, maxCapacity, ticketsSold, user
 
             setTicketsRemaining(ticketsRemaining - 1);
             setUserHasTickets(true);
-            console.log("Successfully incremented 'tickets_sold' field.");
         } catch (error) {
             console.error("Error incrementing 'tickets_sold' field:", error);
         }
