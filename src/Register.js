@@ -40,7 +40,6 @@ const Register = () => {
                 setPasswordMatch(true);
             }
         } else {
-            setValidated(true);
 
             // Check if email is being used already
             const usersRef = collection(db, "Users");
@@ -50,6 +49,7 @@ const Register = () => {
             if (!querySnapshot.empty) {
                 setShowAlert(true);
                 setInvalidEmail(true);
+                setValidated(false);
             } else {
                 try {
                     await addDoc(collection(db, "Users"), {
@@ -60,6 +60,9 @@ const Register = () => {
                         booked_events: []
                     });
                     setSuccess(true);
+                    setShowAlert(false);
+                    setValidated(true);
+
                 } catch (error) {
                     console.error("Error adding document: ", error);
                 }
