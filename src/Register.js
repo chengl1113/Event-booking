@@ -86,7 +86,7 @@ const Register = () => {
             ) : (
                 <div className="container d-flex justify-content-center align-items-center">
                     <Form noValidate validated={validated} onSubmit={handleSubmit} className="w-50">
-                        <h2>Register</h2>
+                        <h1>Register</h1>
 
                         {/* full name input */}
                         <Form.Group className="mb-3" controlId="validationFullName">

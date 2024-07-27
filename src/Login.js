@@ -86,7 +86,7 @@ const Login = () => {
             )}
 
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="w-50">
-                <h2>Sign In</h2>
+                <h1>Sign In</h1>
                 {/* email input */}
                 <Form.Group className="mb-3" controlId="validationEmail">
                     <Form.Label>Email</Form.Label>

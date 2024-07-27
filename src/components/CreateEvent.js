@@ -58,7 +58,6 @@ const CreateEvent = () => {
     };
     return (
         <div>
-
             <NavigationBar />
             <div className='container d-flex flex-column justify-content-center align-items-center'>
                 <h1 className='m-5'>Create Event</h1>
