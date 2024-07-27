@@ -122,7 +122,6 @@ const Login = () => {
 
                 <Button type="submit" className='w-100 mb-3'>Sign In</Button>
                 <p className='primary mb-3'>Need an Account?</p>
-                {/* todo: put router link here */}
                 <Link to="/register" className='btn btn-secondary'>Sign Up</Link>
             </Form>
 

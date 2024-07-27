@@ -10,6 +10,8 @@ const MyEvents = () => {
     const [userEventsIds, setUserEventsIds] = useState([]);
     const [userEvents, setUserEvents] = useState([]);
 
+
+    // Get the event ids the user has tickets to
     useEffect(() => {
         const fetchUserEventIds = async () => {
             try {
@@ -26,6 +28,8 @@ const MyEvents = () => {
         fetchUserEventIds();
     }, [auth.id]);
 
+
+    // get the actual events of the id's
     useEffect(() => {
         const fetchUserEvents = async () => {
             try {

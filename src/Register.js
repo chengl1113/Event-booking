@@ -80,7 +80,6 @@ const Register = () => {
             {success ? (
                 <div className="container d-flex flex-column justify-content-center align-items-center">
                     <h1 className='mb-3'>Registration Success!</h1>
-                    {/* todo: put router link here */}
                     <Link to="/login" className='btn btn-secondary'>Sign In</Link>
                 </div>
             ) : (
@@ -162,7 +161,6 @@ const Register = () => {
 
                         <Button type="submit" className='w-100 mb-3'>Sign Up</Button>
                         <p className='primary mb-3'>Already registered?</p>
-                        {/* todo: put router link here */}
                         <Link to="/login" className='btn btn-secondary'>Sign In</Link>
                     </Form>
                 </div>

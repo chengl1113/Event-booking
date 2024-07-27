@@ -14,7 +14,6 @@ const Home = () => {
 
     // get all events
     useEffect(() => {
-        console.log("home events: ", events);
         const fetchEvents = async () => {
             try {
                 const eventsRef = collection(db, "Events");
@@ -29,16 +28,20 @@ const Home = () => {
                 eventsData.sort((a, b) => a.date.toDate() - b.date.toDate())
 
                 setEvents(eventsData);
+                // console.log("home events: ", events);
             } catch (error) {
                 console.error("Error fetching events: ", error);
             }
         };
 
         fetchEvents();
-    }, [auth.id]);
+
+    }, []);
 
     // get all event ids of the user
     useEffect(() => {
+        console.log("Home mounted");
+
         const fetchUserEventIds = async () => {
             try {
                 const userRef = doc(db, "Users", auth.id);
@@ -49,6 +52,7 @@ const Home = () => {
                 const bookedEvents = userData.booked_events || []
                 const eventIds = bookedEvents.map(ref => ref.id);
                 setUserEventIds(eventIds);
+                console.log("home userEventIds", userEventIds);
 
             } catch (error) {
                 console.error("Error getting user events", error);
@@ -56,7 +60,12 @@ const Home = () => {
         }
         fetchUserEventIds()
 
-    }, [auth.id])
+
+        return () => {
+            console.log("Home Unmount");
+        };
+
+    }, [])
 
     return (
         <div>
